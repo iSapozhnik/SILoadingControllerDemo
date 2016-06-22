@@ -8,6 +8,15 @@
 
 import UIKit
 
+enum LoadingViewStyle {
+	case Indicator
+	case Custom
+}
+
+enum ErrorViewStyle {
+	case Simple
+}
+
 enum ContentType {
 	case Undefined
 	case Empty
@@ -48,9 +57,30 @@ class BaseLoadingViewController: UIViewController {
 		//TODO: create default view for Error
 		return UIView()
 	}
+	
 	func defaultLoadingView() -> UIView {
 		//TODO: create default view for Loading
 		return UIView()
 	}
+	
+	func loadingViewStyle() -> LoadingViewStyle {
+		return .Indicator
+	}
+	
+	func errorViewStyle() -> ErrorViewStyle {
+		return .Simple
+	}
 
+	func showsErrorView() -> Bool {
+		return true
+	}
+	
+	func showsNoDataView() -> Bool {
+		return true
+	}
+	
+	func showsLoadingView() -> Bool {
+		return true
+	}
+	
 }
