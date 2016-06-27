@@ -10,7 +10,7 @@ import UIKit
 
 class LoadingView: UIView {
 
-	func viewWithStyle(style: LoadingViewStyle) -> LoadingView {
+	static func viewWithStyle(style: LoadingViewStyle) -> LoadingView {
 		switch style {
 		case .Indicator:
 			return IndicatorLoadingView()

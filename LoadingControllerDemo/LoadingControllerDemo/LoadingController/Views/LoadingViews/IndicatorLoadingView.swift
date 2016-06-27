@@ -10,13 +10,27 @@ import UIKit
 
 class IndicatorLoadingView: LoadingView {
 
-	convenience init() {
-		super.init()
-		
+	let activity = UIActivityIndicatorView(activityIndicatorStyle: .WhiteLarge)
+	
+	override init(frame: CGRect) {
+		super.init(frame: frame)
+		defaultInitializer()
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
-		fatalError("init(coder:) has not been implemented")
+		super.init(coder: aDecoder)
+		defaultInitializer()
+	}
+	
+	private func defaultInitializer() {
+		activity.startAnimating()
+		activity.color = UIColor.darkGrayColor()
+		self.addSubview(activity)		
+	}
+	
+	override func layoutSubviews() {
+		super.layoutSubviews()
+		activity.center = CGPointMake(CGRectGetMidX(bounds), CGRectGetMidY(bounds))
 	}
 
 }

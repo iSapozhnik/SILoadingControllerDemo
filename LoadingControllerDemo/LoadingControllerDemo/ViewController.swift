@@ -8,11 +8,31 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: BaseLoadingViewController {
 
+	override func viewDidAppear(animated: Bool) {
+		super.viewDidAppear(animated)
+	}
+	
+	func delay(delay:Double, closure:()->()) {
+		dispatch_after(
+			dispatch_time(
+				DISPATCH_TIME_NOW,
+				Int64(delay * Double(NSEC_PER_SEC))
+			),
+			dispatch_get_main_queue(), closure)
+	}
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view, typically from a nib.
+		
+		delay(1) {
+			self.setVisibleScreen(.Loading)
+//			self.delay(2, closure: {
+//				self.setVisibleScreen(.Content)
+//			})
+		}
 	}
 
 	override func didReceiveMemoryWarning() {
