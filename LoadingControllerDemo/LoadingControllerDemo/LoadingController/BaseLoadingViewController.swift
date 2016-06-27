@@ -8,6 +8,17 @@
 
 import UIKit
 
+extension UIViewController {
+	func delay(delay:Double, closure:()->()) {
+		dispatch_after(
+			dispatch_time(
+				DISPATCH_TIME_NOW,
+				Int64(delay * Double(NSEC_PER_SEC))
+			),
+			dispatch_get_main_queue(), closure)
+	}
+}
+
 enum LoadingViewStyle {
 	case Indicator
 	case Custom
@@ -103,7 +114,6 @@ class BaseLoadingViewController: UIViewController {
 	func addLoadingView(viewToAdd: UIView) {
 		view.addSubview(viewToAdd)
 		viewToAdd.translatesAutoresizingMaskIntoConstraints = false
-		viewToAdd.backgroundColor = .redColor()
 		let bindings = ["view": viewToAdd]
 		view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|[view]|", options: [.AlignAllLeading, .AlignAllTrailing], metrics: nil, views: bindings))
 		view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[view]|", options: [.AlignAllTop, .AlignAllBottom], metrics: nil, views: bindings))
@@ -189,7 +199,10 @@ class BaseLoadingViewController: UIViewController {
 		} else {
 			animationQueue.insert(animation, atIndex: 0)
 		}
-		performSelector(Selector(startNextAnimationIfNeeded()), withObject: nil, afterDelay: 0.0)
+		
+		delay(0.0) {
+			self.startNextAnimationIfNeeded()
+		}
 	}
 	
 	private func cancellAllAnimations() {
@@ -198,7 +211,7 @@ class BaseLoadingViewController: UIViewController {
 	}
 	
 	private func performAnimation(animation: AnimationDict) {
-		
+		debugPrint("performAnimation")
 		let fromView = animation[FromViewKey]
 		let toView = animation[ToViewKey]
 		let contentType = animation[ScreenKey]
@@ -275,7 +288,6 @@ class BaseLoadingViewController: UIViewController {
 				}
 			}
 			self.contentView.alpha = CGFloat(contentViewAlpha)
-			debugPrint("contentView alpha set")
 		}
 		
 		func completion() {
@@ -289,21 +301,13 @@ class BaseLoadingViewController: UIViewController {
 		
 		if animated {
 			theToView.alpha = 0.0
-			
-			UIView.animateWithDuration(animationDuration, animations: {
+			UIView.animateWithDuration(animationDuration, delay: 0.0, options: animationOptions(), animations: {
 				animations()
-				}, completion: { (finished) in
-					completion()
+				}, completion: { finished in
+					if finished {
+						completion()
+					}
 			})
-//			UIView.animateWithDuration(animationDuration, delay: 0.0, options: animationOptions(), animations: {
-//				animations()
-//				debugPrint("animation finished")
-//				}, completion: { finished in
-//					debugPrint("completion called")
-//					if finished {
-//						completion()
-//					}
-//			})
 		} else {
 			animations()
 			completion()
@@ -311,13 +315,21 @@ class BaseLoadingViewController: UIViewController {
 	}
 	
 	private func startNextAnimationIfNeeded() {
-		if currentAnimation == nil {
-			guard let lastAnimation = animationQueue.last else { return }
-			
-			currentAnimation = lastAnimation
-			animationQueue.removeLast()
-			performAnimation(lastAnimation)
-		}
+		
+		debugPrint("startNextAnimationIfNeeded")
+		guard self.currentAnimation == nil else { return }
+		
+		guard let lastAnimation = animationQueue.last else { return }
+		self.currentAnimation = lastAnimation
+		self.animationQueue.removeLast()
+		self.performAnimation(lastAnimation)
+		
+	}
+	
+	func synced(lock: AnyObject, closure: () -> ()) {
+		objc_sync_enter(lock)
+		closure()
+		objc_sync_exit(lock)
 	}
 	
 }
