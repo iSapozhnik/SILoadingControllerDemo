@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FF291BE81D228B530002D8AA /* MulticolorLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF291BE71D228B530002D8AA /* MulticolorLoadingView.swift */; };
+		FF291BEB1D2291A30002D8AA /* MulticolorActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF291BEA1D2291A30002D8AA /* MulticolorActivityView.swift */; };
+		FF291BED1D2291CD0002D8AA /* StrokeActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF291BEC1D2291CD0002D8AA /* StrokeActivityView.swift */; };
+		FF291BEF1D2292080002D8AA /* StrokeLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF291BEE1D2292080002D8AA /* StrokeLoadingView.swift */; };
 		FFC7AC9D1D1B457100CE5401 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC7AC9C1D1B457100CE5401 /* AppDelegate.swift */; };
 		FFC7AC9F1D1B457100CE5401 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC7AC9E1D1B457100CE5401 /* ViewController.swift */; };
 		FFC7ACA21D1B457100CE5401 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FFC7ACA01D1B457100CE5401 /* Main.storyboard */; };
@@ -18,6 +22,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FF291BE71D228B530002D8AA /* MulticolorLoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MulticolorLoadingView.swift; sourceTree = "<group>"; };
+		FF291BEA1D2291A30002D8AA /* MulticolorActivityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MulticolorActivityView.swift; sourceTree = "<group>"; };
+		FF291BEC1D2291CD0002D8AA /* StrokeActivityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StrokeActivityView.swift; sourceTree = "<group>"; };
+		FF291BEE1D2292080002D8AA /* StrokeLoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StrokeLoadingView.swift; sourceTree = "<group>"; };
 		FFC7AC991D1B457100CE5401 /* LoadingControllerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoadingControllerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFC7AC9C1D1B457100CE5401 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FFC7AC9E1D1B457100CE5401 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -41,6 +49,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FF291BE91D2291A30002D8AA /* ActivityViews */ = {
+			isa = PBXGroup;
+			children = (
+				FF291BEA1D2291A30002D8AA /* MulticolorActivityView.swift */,
+				FF291BEC1D2291CD0002D8AA /* StrokeActivityView.swift */,
+			);
+			path = ActivityViews;
+			sourceTree = "<group>";
+		};
 		FFC7AC901D1B457100CE5401 = {
 			isa = PBXGroup;
 			children = (
@@ -91,8 +108,11 @@
 		FFC7ACB41D1B504D00CE5401 /* LoadingViews */ = {
 			isa = PBXGroup;
 			children = (
+				FF291BE91D2291A30002D8AA /* ActivityViews */,
 				FFC7ACB51D1B511400CE5401 /* LoadingView.swift */,
 				FFC7ACB71D1B512F00CE5401 /* IndicatorLoadingView.swift */,
+				FF291BE71D228B530002D8AA /* MulticolorLoadingView.swift */,
+				FF291BEE1D2292080002D8AA /* StrokeLoadingView.swift */,
 			);
 			path = LoadingViews;
 			sourceTree = "<group>";
@@ -170,6 +190,10 @@
 			files = (
 				FFC7AC9F1D1B457100CE5401 /* ViewController.swift in Sources */,
 				FFC7ACB61D1B511400CE5401 /* LoadingView.swift in Sources */,
+				FF291BEB1D2291A30002D8AA /* MulticolorActivityView.swift in Sources */,
+				FF291BEF1D2292080002D8AA /* StrokeLoadingView.swift in Sources */,
+				FF291BED1D2291CD0002D8AA /* StrokeActivityView.swift in Sources */,
+				FF291BE81D228B530002D8AA /* MulticolorLoadingView.swift in Sources */,
 				FFC7ACB81D1B512F00CE5401 /* IndicatorLoadingView.swift in Sources */,
 				FFC7AC9D1D1B457100CE5401 /* AppDelegate.swift in Sources */,
 				FFC7ACB01D1B45D200CE5401 /* BaseLoadingViewController.swift in Sources */,

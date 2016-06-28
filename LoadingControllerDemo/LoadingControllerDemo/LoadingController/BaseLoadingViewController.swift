@@ -21,6 +21,8 @@ extension UIViewController {
 
 enum LoadingViewStyle {
 	case Indicator
+	case Stroke
+	case Multicolor
 	case Custom
 }
 

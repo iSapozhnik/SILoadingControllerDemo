@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol Animatable {
+	func startAnimating()
+	func stopAnimating()
+}
+
 class LoadingView: UIView {
 
 	var title: String? {
@@ -24,7 +29,15 @@ class LoadingView: UIView {
 	static func viewWithStyle(style: LoadingViewStyle) -> LoadingView {
 		switch style {
 		case .Indicator:
-			return IndicatorLoadingView(style: .Small)
+			return IndicatorLoadingView(style: .SmallTitle)
+		case .Stroke:
+			let loadingView = StrokeLoadingView()
+			loadingView.startAnimating()
+			return loadingView
+		case .Multicolor:
+			let loadingView = MulticolorLoadingView()
+			loadingView.startAnimating()
+			return loadingView
 		case .Custom:
 			//TODO: fix this
 			return UIView() as! LoadingView
@@ -33,5 +46,5 @@ class LoadingView: UIView {
 	
 	func didSetTitle() {}
 	func didSetMessage() {}
-
+	
 }
