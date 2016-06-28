@@ -11,6 +11,11 @@ import UIKit
 class StrokeLoadingView: LoadingView, Animatable {
 
 	var activity = StrokeActivityView()
+	var strokeColor = UIColor.darkGrayColor() {
+		didSet(color) {
+			activity.strokeColor = color
+		}
+	}
 
 	override init(frame: CGRect) {
 		super.init(frame: frame)
@@ -23,7 +28,8 @@ class StrokeLoadingView: LoadingView, Animatable {
 	}
 	
 	private func defaultInitializer() {
-		let size = CGSizeMake(34, 34)
+		backgroundColor = UIColor(white: 0.9, alpha: 1.0)
+		let size = defaultActivitySize
 		activity.frame = CGRectMake(0, 0, size.width, size.height)
 		addSubview(activity)
 	}
@@ -40,11 +46,9 @@ class StrokeLoadingView: LoadingView, Animatable {
 		dispatch_after(time, dispatch_get_main_queue(), {
 			self.activity.animating = true
 		})
-	
 	}
 	
 	func stopAnimating() {
 		activity.animating = false
 	}
-	
 }

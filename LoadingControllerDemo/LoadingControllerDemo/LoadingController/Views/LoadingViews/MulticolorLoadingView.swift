@@ -23,8 +23,9 @@ class MulticolorLoadingView: LoadingView, Animatable {
 	}
 	
 	private func defaultInitializer() {
-		let size = CGSizeMake(34, 34)
+		let size = defaultActivitySize
 		activity.frame = CGRectMake(0, 0, size.width, size.height)
+		activity.colorArray = rainbowColors()
 		addSubview(activity)
 	}
 	
@@ -45,6 +46,18 @@ class MulticolorLoadingView: LoadingView, Animatable {
 	
 	func stopAnimating() {
 		activity.stopAnimating()
+	}
+	
+	private func rainbowColors() -> [UIColor] {
+		var colors = [UIColor]()
+		
+		let inc = 0.05
+		for var hue = 0.0; hue < 1.0; hue += inc {
+			let color = UIColor(hue: CGFloat(hue), saturation: 1.0, brightness: 1.0, alpha: 1.0)
+			colors.append(color)
+		}
+		return colors
+
 	}
 	
 }

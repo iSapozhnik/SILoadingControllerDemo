@@ -14,7 +14,9 @@ protocol Animatable {
 }
 
 class LoadingView: UIView {
-
+	
+	let defaultActivitySize = CGSizeMake(34, 34)
+	
 	var title: String? {
 		didSet {
 			didSetTitle()
@@ -32,6 +34,7 @@ class LoadingView: UIView {
 			return IndicatorLoadingView(style: .SmallTitle)
 		case .Stroke:
 			let loadingView = StrokeLoadingView()
+			loadingView.strokeColor = .orangeColor()
 			loadingView.startAnimating()
 			return loadingView
 		case .Multicolor:

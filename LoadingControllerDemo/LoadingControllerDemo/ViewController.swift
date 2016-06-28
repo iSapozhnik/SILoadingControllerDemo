@@ -21,9 +21,9 @@ class ViewController: BaseLoadingViewController {
 		delay(1) {
 			self.setVisibleScreen(.Loading)
 			
-			self.delay(2, closure: { 
-				self.setVisibleScreen(.Content)
-			})
+//			self.delay(2, closure: { 
+//				self.setVisibleScreen(.Content)
+//			})
 		}
 	}
 

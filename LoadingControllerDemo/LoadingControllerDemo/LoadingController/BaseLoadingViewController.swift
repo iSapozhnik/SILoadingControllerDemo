@@ -87,7 +87,7 @@ class BaseLoadingViewController: UIViewController {
 	}
 	
 	func defaultLoadingView() -> UIView {
-		let view = LoadingView.viewWithStyle(.Indicator)
+		let view = LoadingView.viewWithStyle(.Stroke)
 		
 		//TODO: add title, background image, etc.
 		view.title = "Loading"

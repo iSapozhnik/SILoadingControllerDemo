@@ -14,7 +14,11 @@ class MulticolorActivityView: UIView {
 	let defaultColor = UIColor.orangeColor()
 	let defaultRoundTime = 1.5
 	
-	var colorArray = [UIColor.greenColor(), UIColor.redColor(), UIColor.blueColor(), UIColor.purpleColor(),]
+	var colorArray = [UIColor.greenColor(), UIColor.redColor(), UIColor.blueColor(), UIColor.purpleColor(),] {
+		didSet {
+			updateAnimations()
+		}
+	}
 	
 	private var circleLayer = CAShapeLayer()
 	private var strokeLineAnimation = CAAnimationGroup()
@@ -91,14 +95,6 @@ class MulticolorActivityView: UIView {
 		strokeColorAnimation.calculationMode = kCAAnimationDiscrete;
 		strokeColorAnimation.duration = Double(colorArray.count) * defaultRoundTime
 		strokeColorAnimation.repeatCount = Float.infinity
-	}
-	
-	private func colorValues() -> [CGColor] {
-		var colors: [CGColor] = []
-		for color in colorArray {
-			colors.append(color.CGColor)
-		}
-		return colors
 	}
 	
 	private func keyTimes() -> Array<Double> {
