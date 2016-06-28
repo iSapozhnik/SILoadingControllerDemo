@@ -8,9 +8,24 @@
 
 import UIKit
 
+enum IndicatorLoadingViewStyle {
+	case Small
+	case Big
+	case SmallTitle
+	case BigTitle
+}
+
 class IndicatorLoadingView: LoadingView {
 
-	let activity = UIActivityIndicatorView(activityIndicatorStyle: .WhiteLarge)
+	var activity = UIActivityIndicatorView(activityIndicatorStyle: .WhiteLarge)
+	var titleLabel: UILabel?
+	var style = IndicatorLoadingViewStyle.Big
+	
+	init(style: IndicatorLoadingViewStyle) {
+		super.init(frame: CGRectZero)
+		self.style = style
+		defaultInitializer()
+	}
 	
 	override init(frame: CGRect) {
 		super.init(frame: frame)
@@ -23,14 +38,58 @@ class IndicatorLoadingView: LoadingView {
 	}
 	
 	private func defaultInitializer() {
+		
+		switch style {
+		case .Big: bigActivity()
+		case .Small: smallActivity()
+		case .SmallTitle: smallTitle()
+		case .BigTitle: bigTitle()
+		}
+	}
+	
+	private func smallActivity() {
+		activity = UIActivityIndicatorView(activityIndicatorStyle: .White)
+		addActivity()
+	}
+	
+	private func bigActivity() {
+		activity = UIActivityIndicatorView(activityIndicatorStyle: .WhiteLarge)
+		addActivity()
+	}
+	
+	private func defaultTitleLabel() {
+		titleLabel = UILabel(frame: CGRectMake(0,0,100,44))
+		titleLabel?.textAlignment = .Center
+		titleLabel?.textColor = UIColor.lightGrayColor()
+		addSubview(titleLabel!)
+	}
+	
+	private func smallTitle() {
+		smallActivity()
+		addActivity()
+		defaultTitleLabel()
+	}
+	
+	private func bigTitle() {
+		bigActivity()
+		addActivity()
+		defaultTitleLabel()
+	}
+	
+	private func addActivity() {
 		activity.startAnimating()
 		activity.color = UIColor.darkGrayColor()
-		self.addSubview(activity)		
+		addSubview(activity)
 	}
 	
 	override func layoutSubviews() {
 		super.layoutSubviews()
 		activity.center = CGPointMake(CGRectGetMidX(bounds), CGRectGetMidY(bounds))
+		titleLabel?.center = CGPointMake(CGRectGetMidX(bounds), CGRectGetMidY(bounds) + 40)
+	}
+	
+	override func didSetTitle() {
+		titleLabel?.text = self.title!
 	}
 
 }

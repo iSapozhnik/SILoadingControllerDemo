@@ -10,14 +10,28 @@ import UIKit
 
 class LoadingView: UIView {
 
+	var title: String? {
+		didSet {
+			didSetTitle()
+		}
+	}
+	var message: String? {
+		didSet {
+			didSetMessage()
+		}
+	}
+	
 	static func viewWithStyle(style: LoadingViewStyle) -> LoadingView {
 		switch style {
 		case .Indicator:
-			return IndicatorLoadingView()
+			return IndicatorLoadingView(style: .Small)
 		case .Custom:
 			//TODO: fix this
 			return UIView() as! LoadingView
 		}
 	}
+	
+	func didSetTitle() {}
+	func didSetMessage() {}
 
 }
